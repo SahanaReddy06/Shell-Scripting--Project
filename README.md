@@ -16,16 +16,10 @@ It uses the **GitHub REST API** and **jq** to fetch collaborator details and fil
 2. The script calls:
 https://api.github.com/repos/<owner>/<repo>/collaborators
 
-markdown
-Copy code
-
 3. It parses the JSON response using `jq`.
 
 4. It filters users who have:
 permissions.pull == true
-
-markdown
-Copy code
 
 5. It prints the list of users with read access.
 
