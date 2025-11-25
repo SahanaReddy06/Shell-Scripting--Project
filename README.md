@@ -47,62 +47,37 @@ git clone https://SahanaReddy06/Shell-Scripting--Project
 Set your GitHub username and tokens:
 
 export username="YourGitHubUsername"
+
 export token="YOUR_GITHUB_TOKEN_HERE"
 
 Verify environment variables:
+
 echo $username
+
 echo $token
 
 Navigate to the script directory:
+
 cd shell-scripting-projects/github-api
 
 Give execute permissions:
+
 chmod +x list-users.sh
 
 Run the script:
+
 ./list-users.sh <repo-owner> <repo-name>
 
 Example (your repository)
+
 /list-users.sh SahanaReddy06 my-repo
 
 Example (public repository)
+
 ./list-users.sh torvalds linux
 
-
-
 ---
-📜 Script Breakdown (Simple Explanation)
-API URL
 
-
-bash
-Copy code
-API_URL="https://api.github.com"
-Read environment variables
-
-
-
-USERNAME=$username
-TOKEN=$token
-Command arguments
-
-
-
-REPO_OWNER=$1
-REPO_NAME=$2
-GitHub API GET function
-
-
-
-github_api_get() {
-    curl -s -u "${USERNAME}:${TOKEN}" "$url"
-}
-Filter users with read access
-
-jq -r '.[] | select(.permissions.pull == true) | .login'
-
-
----
 🎯 Summary
 Checks who has read access to a GitHub repository.
 
