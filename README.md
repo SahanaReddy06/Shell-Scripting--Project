@@ -1,126 +1,138 @@
-📌 📂 Project: GitHub Collaborator Access Checker
+# GitHub Collaborator Access Checker
 
-This project contains a shell script that helps you find users who have READ (pull) access to any GitHub repository.
+This project contains a shell script that checks which GitHub users have **READ (pull) access** to a given repository.  
+It uses the **GitHub REST API** and **jq** to fetch collaborator details and filter users based on permissions.
 
-It uses the GitHub REST API to fetch collaborator details and filters users based on their permissions.
+---
 
+## 🚀 How the Script Works
 
-Automation tasks
+1. You provide:
+   - Your GitHub **username**
+   - Your GitHub **Personal Access Token**
+   - **Repository owner**
+   - **Repository name**
 
-🚀 How the Script Works (Simple Explanation)
+2. The script calls:
+https://api.github.com/repos/<owner>/<repo>/collaborators
 
-You provide:
+markdown
+Copy code
 
-GitHub username
+3. It parses the JSON response using `jq`.
 
-GitHub Personal Access Token
-
-Repository owner
-
-Repository name
-
-The script calls the GitHub API:
-
-GET https://api.github.com/repos/<owner>/<repo>/collaborators
-
-
-It uses jq (JSON parser) to filter users whose permissions contain:
-
+4. It filters users who have:
 permissions.pull == true
 
+markdown
+Copy code
 
-🛠️ Requirements
+5. It prints the list of users with read access.
 
-Before running the script, make sure you have:
+---
 
-✔ Linux or EC2 terminal
-✔ curl installed
+## 🛠️ Requirements
 
-(Usually preinstalled)
+- Linux terminal / EC2
+- `curl`
+- `jq`
+- GitHub **Personal Access Token** with:
+- `repo` permission
 
-✔ jq installed
-
-Install it:
-
+Install `jq` if needed:
+```bash
 sudo apt install jq -y
+🧩 Setup Environment Variables
+Set your GitHub username:
 
-✔ GitHub Personal Access Token
-
-Generate from:
-👉 https://github.com/settings/tokens
-
-Enable these scopes:
-
-repo
-
-🧩 Environment Setup
-1️⃣ Export your GitHub username
+bash
+Copy code
 export username="YourGitHubUsername"
+Set your GitHub token (no space around =):
 
-2️⃣ Export your GitHub token
+bash
+Copy code
 export token="YOUR_GITHUB_TOKEN_HERE"
+Verify environment variables:
 
-Verify:
+bash
+Copy code
 echo $username
 echo $token
-
 ▶️ How to Run the Script
-Navigate to the script folder:
+Navigate to the script directory:
+
+bash
+Copy code
 cd shell-scripting-projects/github-api
+Give execute permissions:
 
-Give execute permission:
+bash
+Copy code
 chmod +x list-users.sh
-
 Run the script:
+
+bash
+Copy code
 ./list-users.sh <repo-owner> <repo-name>
-
-Example (your repo):
+Example (your repository)
+bash
+Copy code
 ./list-users.sh SahanaReddy06 my-repo
-
-Example (public repo of someone else):
+Example (public repository)
+bash
+Copy code
 ./list-users.sh torvalds linux
-
-⭐ Script Output Examples
+⭐ Output Examples
 ✔ If users have read access:
+bash
+Copy code
 Listing users with read access to SahanaReddy06/my-repo...
 Users with read access:
 SahanaReddy06
 developer1
 admin2
-
-✔ If no users have access:
+✔ If no users have read access:
+pgsql
+Copy code
 No users with read access found for SahanaReddy06/my-repo.
+📜 Script Breakdown (Simple Explanation)
+API URL
 
-
-
-📜 Script Explained (Line-by-Line Understanding)
-Set API URL
+bash
+Copy code
 API_URL="https://api.github.com"
-
 Read environment variables
+
+bash
+Copy code
 USERNAME=$username
 TOKEN=$token
+Command arguments
 
-Inputs from terminal 
+bash
+Copy code
 REPO_OWNER=$1
 REPO_NAME=$2
+GitHub API GET function
 
-Function: API GET call
+bash
+Copy code
 github_api_get() {
     curl -s -u "${USERNAME}:${TOKEN}" "$url"
 }
+Filter users with read access
 
-Function: list users with read access
-collaborators="$(github_api_get "$endpoint" | jq -r '.[] | select(.permissions.pull == true) | .login')"
-
-If no users found
-if [[ -z "$collaborators" ]]; then
-    echo "No users with read access found..."
-
+bash
+Copy code
+jq -r '.[] | select(.permissions.pull == true) | .login'
 🎯 Summary
+Checks who has read access to a GitHub repository.
 
-✔ This script checks who can READ a GitHub repo
-✔ Works using GitHub API + jq
-✔ Requires GitHub token
-✔ Supports any repo (yours or public ones)
-✔ Extremely useful for DevOps / security
+Uses GitHub API + jq.
+
+Requires GitHub Personal Access Token.
+
+Supports any public or private repo (you must have access).
+
+Great for DevOps, security audits, and automation.
