@@ -33,54 +33,40 @@ permissions.pull == true
 - GitHub **Personal Access Token** with:
 - `repo` permission
 
-Install `jq` if needed:
-```bash
+---
+
 sudo apt install jq -y
+
+git clone https://SahanaReddy06/Shell-Scripting--Project
+
 🧩 Setup Environment Variables
-Set your GitHub username:
+Set your GitHub username and tokens:
 
-bash
-Copy code
 export username="YourGitHubUsername"
-Set your GitHub token (no space around =):
-
-bash
-Copy code
 export token="YOUR_GITHUB_TOKEN_HERE"
-Verify environment variables:
 
-bash
-Copy code
+Verify environment variables:
 echo $username
 echo $token
+
 ▶️ How to Run the Script
 Navigate to the script directory:
-
-bash
-Copy code
 cd shell-scripting-projects/github-api
+
 Give execute permissions:
-
-bash
-Copy code
 chmod +x list-users.sh
-Run the script:
 
-bash
-Copy code
+Run the script:
 ./list-users.sh <repo-owner> <repo-name>
+
 Example (your repository)
-bash
-Copy code
-./list-users.sh SahanaReddy06 my-repo
+/list-users.sh SahanaReddy06 my-repo
+
 Example (public repository)
-bash
-Copy code
 ./list-users.sh torvalds linux
+
 ⭐ Output Examples
 ✔ If users have read access:
-bash
-Copy code
 Listing users with read access to SahanaReddy06/my-repo...
 Users with read access:
 SahanaReddy06
@@ -88,8 +74,10 @@ developer1
 admin2
 ✔ If no users have read access:
 pgsql
-Copy code
+
 No users with read access found for SahanaReddy06/my-repo.
+
+
 📜 Script Breakdown (Simple Explanation)
 API URL
 
@@ -98,28 +86,24 @@ Copy code
 API_URL="https://api.github.com"
 Read environment variables
 
-bash
-Copy code
+
 USERNAME=$username
 TOKEN=$token
 Command arguments
 
-bash
-Copy code
+
 REPO_OWNER=$1
 REPO_NAME=$2
 GitHub API GET function
 
-bash
-Copy code
+
 github_api_get() {
     curl -s -u "${USERNAME}:${TOKEN}" "$url"
 }
 Filter users with read access
 
-bash
-Copy code
 jq -r '.[] | select(.permissions.pull == true) | .login'
+
 🎯 Summary
 Checks who has read access to a GitHub repository.
 
