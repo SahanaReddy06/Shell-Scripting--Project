@@ -35,6 +35,7 @@ permissions.pull == true
 
 ---
 
+
 sudo apt install jq -y
 
 git clone https://SahanaReddy06/Shell-Scripting--Project
@@ -48,6 +49,8 @@ export token="YOUR_GITHUB_TOKEN_HERE"
 Verify environment variables:
 echo $username
 echo $token
+
+
 
 ▶️ How to Run the Script
 Navigate to the script directory:
@@ -65,6 +68,9 @@ Example (your repository)
 Example (public repository)
 ./list-users.sh torvalds linux
 
+
+---
+
 ⭐ Output Examples
 ✔ If users have read access:
 Listing users with read access to SahanaReddy06/my-repo...
@@ -78,8 +84,11 @@ pgsql
 No users with read access found for SahanaReddy06/my-repo.
 
 
+
+
 📜 Script Breakdown (Simple Explanation)
 API URL
+
 
 bash
 Copy code
@@ -87,14 +96,17 @@ API_URL="https://api.github.com"
 Read environment variables
 
 
+
 USERNAME=$username
 TOKEN=$token
 Command arguments
 
 
+
 REPO_OWNER=$1
 REPO_NAME=$2
 GitHub API GET function
+
 
 
 github_api_get() {
@@ -103,6 +115,8 @@ github_api_get() {
 Filter users with read access
 
 jq -r '.[] | select(.permissions.pull == true) | .login'
+
+
 
 🎯 Summary
 Checks who has read access to a GitHub repository.
