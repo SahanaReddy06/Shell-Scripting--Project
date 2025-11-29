@@ -14,7 +14,7 @@ It uses the **GitHub REST API** and **jq** to fetch collaborator details and fil
    - **Repository name**
 
 2. The script calls:
-https://api.github.com/repos/<owner>/<repo>/collaborators
+`https://api.github.com/repos/<owner>/<repo>/collaborators`
 
 3. It parses the JSON response using `jq`.
 
@@ -36,9 +36,9 @@ permissions.pull == true
 ---
 
 
-sudo apt install jq -y
+`sudo apt install jq -y`
 
-git clone https://SahanaReddy06/Shell-Scripting--Project
+`git clone https://SahanaReddy06/Shell-Scripting--Project`
 
 ---
 
@@ -46,27 +46,27 @@ git clone https://SahanaReddy06/Shell-Scripting--Project
 
 Set your GitHub username and tokens:
 
-export username="YourGitHubUsername"
+`export username="YourGitHubUsername"`
 
-export token="YOUR_GITHUB_TOKEN_HERE"
+`export token="YOUR_GITHUB_TOKEN_HERE"`
 
 Verify environment variables:
 
-echo $username
+`echo $username`
 
-echo $token
+`echo $token`
 
 Navigate to the script directory:
 
-cd shell-scripting-projects/github-api
+`cd shell-scripting-projects/github-api`
 
 Give execute permissions:
 
-chmod +x list-users.sh
+`chmod +x list-users.sh`
 
 Run the script:
 
-./list-users.sh <repo-owner> <repo-name>
+`./list-users.sh <repo-owner> <repo-name>`
 
 Example (your repository)
 
